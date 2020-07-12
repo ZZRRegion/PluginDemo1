@@ -1,0 +1,57 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen"
+        Title="插件式文本处理" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Height="38" Margin="20" Orientation="Horizontal">
+            <TextBlock FontSize="20" VerticalAlignment="Center" Text="插件文件夹：" />
+            <TextBox Text="{Binding PluginDir}" FontSize="20" Margin="20,0,20,0" VerticalAlignment="Center" Width="500" />
+            <Button x:Name="btnOpenDir" Click="btnOpenDir_Click" Content="选择文件夹..." />
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <ListView ItemsSource="{Binding Plugins}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="插件名称" DisplayMemberBinding="{Binding PluginName}" />
+                        <GridViewColumn Header="替换字符" DisplayMemberBinding="{Binding PluginPara}" />
+                        <GridViewColumn Header="描述" DisplayMemberBinding="{Binding PluginDesc}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBox Text="{Binding Input}" />
+                <TextBox Text="{Binding OutString}" Grid.Row="1" />
+            </Grid>
+        </Grid>
+        <DockPanel Grid.Row="2">
+            <Button x:Name="btnTxt" Click="btnTxt_Click" Margin="0,0,30,0" DockPanel.Dock="Right"
+                    HorizontalAlignment="Right"
+                    Content="解析文本" />
+            <Button x:Name="btnLoadPlugin" Click="btnLoadPlugin_Click" Margin="20,0,20,0" DockPanel.Dock="Right" Content="加载插件" />
+            <TextBlock FontSize="20">
+                <Run Text="插件数量：" />
+                <Run Text="{Binding Count}" />
+            </TextBlock>
+            
+        </DockPanel>
+    </Grid>
+</Window>
